@@ -1733,7 +1733,7 @@ impl<'a, K, V> Iterator for IterMut<'a, K, V> {
             return None;
         }
 
-        let key = unsafe { &mut (*(*self.ptr).key.as_mut_ptr()) as &mut K };
+        let key = unsafe { &(*(*self.ptr).key.as_ptr()) as &K };
         let val = unsafe { &mut (*(*self.ptr).val.as_mut_ptr()) as &mut V };
 
         self.len -= 1;
@@ -1757,7 +1757,7 @@ impl<'a, K, V> DoubleEndedIterator for IterMut<'a, K, V> {
             return None;
         }
 
-        let key = unsafe { &mut (*(*self.end).key.as_mut_ptr()) as &mut K };
+        let key = unsafe { &(*(*self.end).key.as_ptr()) as &K };
         let val = unsafe { &mut (*(*self.end).val.as_mut_ptr()) as &mut V };
 
         self.len -= 1;
