@@ -2850,6 +2850,22 @@ mod tests {
         assert_eq!(cache.pop_lru(), None);
         assert_eq!(cloned.pop_lru(), None);
     }
+
+    #[test]
+    fn iter_mut_stacked_borrows_violation() {
+        let mut cache: LruCache<i32, i32> = LruCache::new(NonZeroUsize::new(3).unwrap());
+        cache.put(1, 10);
+        cache.put(2, 20);
+        cache.put(3, 30);
+
+        for (_k, v) in cache.iter_mut() {
+            *v *= 2;
+        }
+
+        assert_eq!(cache.get(&1), Some(&20));
+        assert_eq!(cache.get(&2), Some(&40));
+        assert_eq!(cache.get(&3), Some(&60));
+    }
 }
 
 /// Doctests for what should *not* compile
