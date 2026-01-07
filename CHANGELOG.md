@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.16.3](https://github.com/jeromefroe/lru-rs/tree/0.16.3) - 2026-01-07
+
+- Fix Stacked Borrows violation in `IterMut`.
+
 ## [v0.16.2](https://github.com/jeromefroe/lru-rs/tree/0.16.2) - 2025-10-14
 
 - Upgrade hashbrown dependency to 0.16.0.
